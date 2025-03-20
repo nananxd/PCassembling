@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141c3c4ae7f666549b760ac9f7a5e258, type: 3}
+  m_Name: ItemData
+  m_EditorClassIdentifier: 
+  items:
+  - itemId: thermalPaste
+    itemName: thermalPaste
+    itemImage: {fileID: 21300000, guid: c8033a80107971c48bb53c740f339b9e, type: 3}
+    itemPrefab: {fileID: 1229873780707928262, guid: d91f20bd4d0be114396f921b38116b6c,
+      type: 3}
+  - itemId: hddSata
+    itemName: hddSata
+    itemImage: {fileID: 21300000, guid: 298540bc87af6134b9c7ae535c2be697, type: 3}
+    itemPrefab: {fileID: 126465740541979497, guid: d76733c089fb02e4c860adef317991e3,
+      type: 3}
+  - itemId: opticSata
+    itemName: opticSata
+    itemImage: {fileID: 21300000, guid: 86e477ad678cfe84295215c6b9da5872, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}
+  - itemId: motherboardScrews
+    itemName: motherboardScrews
+    itemImage: {fileID: 21300000, guid: 8facd65746d7c0d45bcfedbcf0383fa8, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}
+  - itemId: powerSupplyScrews
+    itemName: powerSupplyScrews
+    itemImage: {fileID: 21300000, guid: 8facd65746d7c0d45bcfedbcf0383fa8, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}
+  - itemId: hddScrews
+    itemName: hddScrews
+    itemImage: {fileID: 21300000, guid: 8facd65746d7c0d45bcfedbcf0383fa8, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}
+  - itemId: opticScrews
+    itemName: opticScrews
+    itemImage: {fileID: 21300000, guid: 8facd65746d7c0d45bcfedbcf0383fa8, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}
+  - itemId: frontPanel
+    itemName: frontPanel
+    itemImage: {fileID: 21300000, guid: 231027599236b4c47829567c16bf1910, type: 3}
+    itemPrefab: {fileID: 6767871282662135201, guid: 878c3b0acf55c2d40992e5a58747091e,
+      type: 3}

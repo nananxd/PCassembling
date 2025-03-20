@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e641cb5056d01459779ad0d502b831, type: 3}
+  m_Name: CableInstall
+  m_EditorClassIdentifier: 
+  group: 2
+  componentName: cables
+  stepsToComplete:
+  - {fileID: 11400000, guid: 3b80676afee35e34f87f0ea16b4ca47a, type: 2}
+  - {fileID: 11400000, guid: f47168b6daff69747876201e5ae37841, type: 2}
+  - {fileID: 11400000, guid: c9442964424a5ff4ba614ad57d4ed01a, type: 2}
+  - {fileID: 11400000, guid: a49b0d0ccbe2079498edc459a77bda49, type: 2}
+  - {fileID: 11400000, guid: c0d488a0daa6b414aa542fcf3df4c000, type: 2}
+  - {fileID: 11400000, guid: 84146fb7b05e3f94d9d97bbcd116e1b6, type: 2}
+  - {fileID: 11400000, guid: a08e992a5755683459628bada9fc8a4e, type: 2}
+  - {fileID: 11400000, guid: 5fe9ec7c3da523649af0c401edcc024e, type: 2}
+  - {fileID: 11400000, guid: fb180cb1b1b9ee543b7f4caef56f46fc, type: 2}

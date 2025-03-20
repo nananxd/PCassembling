@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e641cb5056d01459779ad0d502b831, type: 3}
+  m_Name: CablesComponent
+  m_EditorClassIdentifier: 
+  group: 2
+  componentName: cables
+  stepsToComplete:
+  - {fileID: 11400000, guid: 617bc91c75ce3f14b92bc61bb035e3cd, type: 2}
+  - {fileID: 11400000, guid: b60aee3aac47ef5488d0de987f3d9169, type: 2}
+  - {fileID: 11400000, guid: ce98dfe89a17e7d468db904385514874, type: 2}
+  - {fileID: 11400000, guid: 243109c3780cf76428b598a95eccb82d, type: 2}
+  - {fileID: 11400000, guid: 0f4f285f97053be4383119d4d6640aa1, type: 2}

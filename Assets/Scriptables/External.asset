@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e641cb5056d01459779ad0d502b831, type: 3}
+  m_Name: External
+  m_EditorClassIdentifier: 
+  group: 1
+  componentName: externals
+  stepsToComplete:
+  - {fileID: 11400000, guid: 1e7af57d1d7849e4e836eae65de6ef4f, type: 2}
+  - {fileID: 11400000, guid: 4f2704e4ada940e40b25b90ff65cc91a, type: 2}
+  - {fileID: 11400000, guid: 045e98d1a22810344974f73d42f8b945, type: 2}
+  - {fileID: 11400000, guid: 666fe6dc3f3e1b4469e53dd6ec57f717, type: 2}
+  - {fileID: 11400000, guid: 2dc9bba0c28f4704fb097e0d4988a62f, type: 2}
+  - {fileID: 11400000, guid: 5352f66bf67edf2478734d2bf9d1baa4, type: 2}

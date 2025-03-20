@@ -1,0 +1,31 @@
+Library: C:\Users\Tigz\PCAssembly\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
+--platform=Android
+--backend=burst-llvm-16
+--target=ARMV7A_NEON32
+--global-safety-checks-setting=Off
+--meta-data-generation=False
+--dump=Function
+--float-precision=Standard
+--target-framework=NetFramework
+--assembly-defines=Assembly-CSharp-firstpass;
+--assembly-defines=Assembly-CSharp;
+--assembly-defines=Cinemachine;
+--assembly-defines=DOTween;
+--assembly-defines=mscorlib;
+--assembly-defines=System.Core;
+--assembly-defines=System;
+--assembly-defines=Unity.Animation.Rigging;
+--assembly-defines=Unity.Burst;
+--assembly-defines=Unity.TextMeshPro;
+--assembly-defines=Unity.Timeline;
+--assembly-defines=UnityEngine;
+--assembly-defines=XCharts.Examples;
+--assembly-defines=XCharts.Runtime;
+--generate-link-xml=Temp\burst.link.xml
+--temp-folder=C:\Users\Tigz\PCAssembly\Temp\Burst
+--key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--decode-folder=C:\Users\Tigz\PCAssembly\Library\Burst
+--output=C:\Users\Tigz\PCAssembly\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
+--pdb-search-paths=Temp/ManagedSymbols/
+
+

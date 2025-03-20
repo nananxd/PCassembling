@@ -1,0 +1,481 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dadda1160b902f45a1c211a87071bbe, type: 3}
+  m_Name: Quiz
+  m_EditorClassIdentifier: 
+  quizes:
+  - quizName: ' What is the first step before disassembling a computer?'
+    correctAnswer: ' Unplug the power source '
+    a: ' Open the case'
+    b: ' Unplug the power source '
+    c: 'Remove the CPU '
+    d: ' Disconnect all peripherals '
+  - quizName: ' Which tool is commonly used to remove screws from a computer case?'
+    correctAnswer: Phillips screwdriver
+    a: ' Flathead screwdriver'
+    b: ' Pliers '
+    c: Phillips screwdriver
+    d: Tweezers
+  - quizName: ' What safety measure should you take before handling computer components?'
+    correctAnswer: 'Use an anti-static wrist strap '
+    a: 'Wash hands with soap '
+    b: 'Use an anti-static wrist strap '
+    c: 'Wear rubber gloves '
+    d: ' Use a dry cloth'
+  - quizName: ' What does PSU stand for in computer assembly?'
+    correctAnswer: 'Power Supply Unit '
+    a: 'Power Supply Unit '
+    b: ' Processing System Unit'
+    c: ' Peripheral Support Unit '
+    d: 'Personal Storage Utility '
+  - quizName: The motherboard is attached to the case using what?
+    correctAnswer: ' Screws and standoffs '
+    a: ' Plastic clips '
+    b: ' Screws and standoffs '
+    c: 'Tape '
+    d: ' Rubber spacers '
+  - quizName: ' Which component is responsible for cooling the CPU?
+
+'
+    correctAnswer: 'CPU cooler '
+    a: 'Power supply fan '
+    b: 'CPU cooler '
+    c: ' Hard drive fan '
+    d: ' Motherboard '
+  - quizName: ' What is the purpose of thermal paste?
+
+'
+    correctAnswer: 'To prevent overheating of the processor '
+    a: 'To make the CPU look cleaner '
+    b: 'To prevent overheating of the processor '
+    c: To protect the motherboard
+    d: 'To secure the CPU socket '
+  - quizName: 'Which of the following is NOT a storage device?
+
+'
+    correctAnswer: ' RAM'
+    a: ' Hard Drive '
+    b: ' SSD '
+    c: ' RAM'
+    d: Flash Drive
+  - quizName: What should be the last component installed when assembling a computer?
+    correctAnswer: Side panel of the case
+    a: RAM
+    b: CPU
+    c: Power Supply
+    d: Side panel of the case
+  - quizName: What is the standard tool used to remove or install RAM?
+    correctAnswer: ' Bare hands '
+    a: Screwdriver
+    b: ' Bare hands '
+    c: Pliers
+    d: Rubber gloves
+  - quizName: What is the first step in installing a CPU?
+    correctAnswer: ' Align the notches and place it in the socket '
+    a: ' Apply thermal paste '
+    b: ' Align the notches and place it in the socket '
+    c: Lock the CPU in place
+    d: 'Connect the power cable '
+  - quizName: ' What type of cable is used to connect a hard drive to a motherboard?
+
+'
+    correctAnswer: 'SATA cable '
+    a: 'SATA cable '
+    b: ' USB cable '
+    c: ' HDMI cable '
+    d: ' Ethernet cable '
+  - quizName: ' When assembling a computer, which component is installed first?
+
+'
+    correctAnswer: 'Motherboard '
+    a: RAM
+    b: Hard drive
+    c: 'Motherboard '
+    d: ' Power supply '
+  - quizName: 'What is the correct way to remove RAM from the motherboard?
+
+'
+    correctAnswer: 'Press down the side clips and gently remove it '
+    a: 'Pull it out forcefully '
+    b: ' Use a screwdriver '
+    c: 'Press down the side clips and gently remove it '
+    d: 'Twist and pull '
+  - quizName: ' What is the purpose of the CMOS battery?
+
+'
+    correctAnswer: 'Store BIOS settings '
+    a: ' Power the motherboard '
+    b: 'Store BIOS settings '
+    c: 'Boost RAM speed '
+    d: 'Enhance CPU performance '
+  - quizName: 'What component houses the processor, RAM, and expansion cards?
+
+'
+    correctAnswer: ' Motherboard '
+    a: ' Hard drive '
+    b: ' Power supply '
+    c: ' Motherboard '
+    d: GPU
+  - quizName: 'Which of the following is an output device?
+
+'
+    correctAnswer: Monitor
+    a: Monitor
+    b: Keyboard
+    c: Mouse
+    d: Scanner
+  - quizName: ' What should you do before installing a power supply?
+
+'
+    correctAnswer: 'Check the voltage selector switch '
+    a: 'Remove the motherboard '
+    b: Adjust the CPU cooler
+    c: 'Test the power supply with a multimeter '
+    d: 'Check the voltage selector switch '
+  - quizName: ' Which of these tools is used to test electrical continuity in a circuit?
+
+'
+    correctAnswer: Multimeter
+    a: Multimeter
+    b: Screwdriver
+    c: Pliers
+    d: Wire cutter
+  - quizName: 'What must be done after assembling a computer?
+
+'
+    correctAnswer: 'Test the system by turning it on '
+    a: 'Apply more thermal paste '
+    b: 'Test the system by turning it on '
+    c: ' Shake the case to check for loose parts '
+    d: Remove the motherboard again for rechecking
+  - quizName: ' What is the function of a POST (Power-On Self-Test) during startup?
+
+'
+    correctAnswer: Checks the hardware components
+    a: ' Loads the operating system '
+    b: Checks the hardware components
+    c: ' Cleans the system from dust '
+    d: ' Increases CPU speed '
+  - quizName: 'How do you properly install a RAM module?
+
+'
+    correctAnswer: ' Align the notches and press firmly until the clips lock'
+    a: ' Insert it in any direction'
+    b: ' Align the notches and press firmly until the clips lock'
+    c: ' Screw it onto the motherboard'
+    d: 'Tape it to the motherboard '
+  - quizName: ' Which storage device offers the fastest data access speed?
+
+'
+    correctAnswer: SSD
+    a: HDD
+    b: SSD
+    c: ' USB flash drive '
+    d: ' CD/DVD '
+  - quizName: 'What is the purpose of the I/O shield in a computer case?
+
+'
+    correctAnswer: Provides a cutout for rear motherboard ports
+    a: ' Protects the motherboard from static electricity '
+    b: 'Covers unused PCIe slots '
+    c: Provides a cutout for rear motherboard ports
+    d: 'Increases cooling efficiency '
+  - quizName: 'Where do you install the graphics card in a modern motherboard?
+
+'
+    correctAnswer: PCIe x16 slot
+    a: ' SATA slot '
+    b: PCIe x16 slot
+    c: ' RAM slot '
+    d: ' CPU socket'
+  - quizName: ' Which of the following is a peripheral device?
+
+'
+    correctAnswer: Printer
+    a: Motherboard
+    b: 'Graphics card '
+    c: Printer
+    d: CPU
+  - quizName: ' What is the main purpose of the BIOS?
+
+'
+    correctAnswer: 'Controls hardware initialization '
+    a: ' Stores user files '
+    b: 'Manages RAM usage '
+    c: 'Controls hardware initialization '
+    d: ' Enhances CPU speed '
+  - quizName: What component must be installed before powering up a newly assembled
+      computer?
+    correctAnswer: RAM
+    a: Printer
+    b: 'Operating system '
+    c: RAM
+    d: 'USB drive '
+  - quizName: ' What type of connector is commonly used for internal power supply
+      connections?
+
+'
+    correctAnswer: Molex
+    a: USB
+    b: HDMI
+    c: Molex
+    d: VGA
+  - quizName: What is the correct way to hold a hard drive when installing it?
+    correctAnswer: ' By the edges '
+    a: ' By the spinning disk '
+    b: ' By the edges '
+    c: ' By the circuit board '
+    d: ' By the power connector '
+  - quizName: ' How can you determine if a power supply is functioning properly?
+
+'
+    correctAnswer: 'Use a multimeter or PSU tester '
+    a: 'Check if the fan spins '
+    b: 'Shake it and listen for noise '
+    c: Press all the cables tightly
+    d: 'Use a multimeter or PSU tester '
+  - quizName: 'What does a SATA cable connect?
+
+'
+    correctAnswer: Hard drive or SSD to motherboard
+    a: 'CPU to RAM '
+    b: Hard drive or SSD to motherboard
+    c: ' Power supply to motherboard '
+    d: ' Mouse to USB port'
+  - quizName: 'Which of the following is NOT a component of a power supply unit?
+
+'
+    correctAnswer: 'Hard drive '
+    a: Transformer
+    b: Capacitor
+    c: 'Heat sink '
+    d: 'Hard drive '
+  - quizName: 'Which tool is essential for troubleshooting computer hardware?
+
+'
+    correctAnswer: Multimeter
+    a: Multimeter
+    b: Paintbrush
+    c: Hairdryer
+    d: Scissors
+  - quizName: What is the safest way to remove dust from a computer?
+    correctAnswer: 'Use compressed air '
+    a: 'Use a wet cloth '
+    b: ' Blow into it '
+    c: 'Use compressed air '
+    d: 'Shake the computer case '
+  - quizName: 'What is the purpose of standoffs in a computer case?
+
+'
+    correctAnswer: 'Prevent short circuits by keeping the motherboard elevated '
+    a: 'Prevent short circuits by keeping the motherboard elevated '
+    b: 'Secure the CPU to the socket '
+    c: ' Hold the RAM in place '
+    d: 'Provide additional cooling '
+  - quizName: ' What tool is best for tightening or loosening screws inside a computer
+      case?
+
+'
+    correctAnswer: 'Phillips screwdriver '
+    a: Hammer
+    b: Wrench
+    c: 'Phillips screwdriver '
+    d: ' Needle-nose pliers '
+  - quizName: 'Which of the following is NOT a function of a heat sink?
+
+'
+    correctAnswer: 'Convert heat to electricity '
+    a: 'Absorb heat from the CPU '
+    b: ' Increase airflow inside the case '
+    c: Transfer heat away from the processor
+    d: 'Convert heat to electricity '
+  - quizName: 'If a newly assembled computer does not power on, what should you check
+      first?
+
+'
+    correctAnswer: 'If the power supply switch is on '
+    a: 'If the CPU is installed upside down '
+    b: 'If the power supply switch is on '
+    c: 'If the RAM is properly formatted '
+    d: 'If the mouse is plugged in '
+  - quizName: ' What should be applied between the CPU and heatsink?
+
+'
+    correctAnswer: 'Thermal paste '
+    a: Glue
+    b: 'Thermal paste '
+    c: 'Lubricating oil '
+    d: Solder
+  - quizName: ' What type of memory is volatile and loses data when power is turned
+      off?'
+    correctAnswer: RAM
+    a: ROM
+    b: HDD
+    c: RAM
+    d: SSD
+  - quizName: ' What must be done before installing a CPU fan?
+
+'
+    correctAnswer: ' Apply thermal paste '
+    a: ' Apply thermal paste '
+    b: 'Remove the motherboard '
+    c: ' Insert a CD '
+    d: ' Install the graphics card '
+  - quizName: Where do you connect a front panel power button cable?
+    correctAnswer: ' Front panel header on the motherboard '
+    a: 'PCIe slot '
+    b: 'RAM slot '
+    c: ' Front panel header on the motherboard '
+    d: 'CPU socket '
+  - quizName: Which type of port is commonly used to connect a monitor?
+    correctAnswer: 'VGA or HDMI '
+    a: 'VGA or HDMI '
+    b: 'SATA '
+    c: ' USB '
+    d: ' Ethernet '
+  - quizName: 'What happens if RAM is not seated properly?
+
+'
+    correctAnswer: 'Computer will not boot '
+    a: 'Computer will not boot '
+    b: 'CPU will overheat '
+    c: 'Graphics will be distorted '
+    d: 'Computer will be slower '
+  - quizName: 'Which component controls all communication between hardware?
+
+'
+    correctAnswer: Motherboard
+    a: 'Graphics card '
+    b: Motherboard
+    c: ' Power supply '
+    d: 'Hard drive '
+  - quizName: ' Which tool is useful for securing small cables inside a computer?
+
+'
+    correctAnswer: 'Cable ties '
+    a: 'Cable ties '
+    b: Glue
+    c: Hammer
+    d: ' Screwdriver '
+  - quizName: 'What should you do before closing a newly assembled PC case?
+
+'
+    correctAnswer: ' Check for loose components '
+    a: ' Check for loose components '
+    b: ' Format the hard drive '
+    c: 'Install the operating system '
+    d: 'Unplug all cables '
+  - quizName: 'Which component contains the system firmware?
+
+'
+    correctAnswer: BIOS
+    a: RAM
+    b: BIOS
+    c: 'Hard drive '
+    d: ' Graphics card '
+  - quizName: 'What should you do after assembling a PC and before installing the
+      OS?
+
+'
+    correctAnswer: ' Run POST and BIOS setup '
+    a: ' Run POST and BIOS setup '
+    b: 'Insert a USB drive '
+    c: 'Install all software '
+    d: 'Connect to the internet '
+  - quizName: ' You are assembling a PC, and after installing all components, the
+      system does not power on. What is the FIRST thing you should check?
+
+'
+    correctAnswer: ' Check if the power supply switch is turned on '
+    a: ' Replace the motherboard immediately '
+    b: ' Check if the power supply switch is turned on '
+    c: 'Remove and reinstall the CPU '
+    d: 'Format the hard drive '
+  - quizName: "While disassembling a computer, you notice that some screws are stuck
+      and won\u2019t come out. What should you do?\r\n"
+    correctAnswer: 'Use the correct screwdriver and apply steady pressure '
+    a: 'Use excessive force to remove them '
+    b: 'Use the correct screwdriver and apply steady pressure '
+    c: 'Use a knife to pry them out '
+    d: 'Skip those screws and continue disassembly '
+  - quizName: ' After assembling a PC, you turn it on and hear a continuous beeping
+      sound. What could be the most likely issue?
+
+'
+    correctAnswer: 'RAM is not properly seated '
+    a: ' Faulty power supply '
+    b: 'Loose monitor cable '
+    c: 'RAM is not properly seated '
+    d: ' Hard drive is not connected '
+  - quizName: "While installing a CPU, you accidentally bend one of the processor\u2019s
+      pins. What should you do?\r\n"
+    correctAnswer: 'Carefully straighten the pin using tweezers '
+    a: ' Apply glue to hold it in place '
+    b: 'Carefully straighten the pin using tweezers '
+    c: 'Continue the installation and hope it works '
+    d: 'Replace the entire CPU immediately '
+  - quizName: 'A customer asks you to upgrade their PC by installing more RAM. After
+      installation, the PC does not detect the new memory. What should you check
+      first?
+
+'
+    correctAnswer: 'If the RAM is properly inserted into the slot '
+    a: 'If the RAM is properly inserted into the slot '
+    b: ' If the power supply is working '
+    c: ' If the hard drive has enough space '
+    d: If the cooling system is operational
+  - quizName: 'While assembling a PC, you accidentally touch the motherboard''s circuit
+      board with your fingers. What could be a possible consequence?
+
+'
+    correctAnswer: Corrosion or static discharge damage
+    a: Corrosion or static discharge damage
+    b: 'Improved performance due to body heat '
+    c: 'Faster boot time '
+    d: ' Nothing will happen, as motherboards are durable '
+  - quizName: 'You are troubleshooting a computer that does not display anything
+      on the screen after turning it on. What is the MOST likely cause?
+
+'
+    correctAnswer: 'Power supply is not connected to the motherboard '
+    a: 'Power supply is not connected to the motherboard '
+    b: ' Keyboard and mouse are not connected '
+    c: ' CPU is overheating '
+    d: 'BIOS settings are incorrect '
+  - quizName: 'A client wants you to assemble a PC but asks for the lowest possible
+      budget. Which component would be the most reasonable to downgrade without significantly
+      affecting basic performance?
+
+'
+    correctAnswer: ' Graphics card '
+    a: Motherboard
+    b: ' Graphics card '
+    c: Processor
+    d: ' Power supply '
+  - quizName: 'After cleaning and reassembling a PC, you notice that the CPU temperature
+      is abnormally high. What should you check?
+
+'
+    correctAnswer: ' If the CPU fan is properly installed and working '
+    a: ' If the CPU fan is properly installed and working '
+    b: ' If the graphics card is overheating '
+    c: 'If the hard drive is formatted correctly '
+    d: ' If the monitor resolution is set to high '
+  - quizName: 'You are disassembling a desktop for maintenance. What is the FIRST
+      step you should take?
+
+'
+    correctAnswer: 'Remove the battery and unplug the power source '
+    a: 'Remove the battery and unplug the power source '
+    b: 'Unscrew the back panel immediately '
+    c: ' Remove the keyboard first '
+    d: 'Disconnect the monitor '

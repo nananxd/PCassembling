@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e641cb5056d01459779ad0d502b831, type: 3}
+  m_Name: CpuPart
+  m_EditorClassIdentifier: 
+  group: 0
+  componentName: cpu
+  stepsToComplete:
+  - {fileID: 11400000, guid: 65c4f7dc015cea749a5062d6d5df5b70, type: 2}
+  - {fileID: 11400000, guid: 7fab3a1a9f66b5948a6e35b61fd7d753, type: 2}
+  - {fileID: 11400000, guid: 45bd6ed59722f214aad37aa5c8178ff4, type: 2}
