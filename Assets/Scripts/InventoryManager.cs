@@ -11,12 +11,22 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryUI currentSelectedItem;
     public List<InventoryUI> inventoryItems;
 
-    public List<InventoryUI> InventoryItems { get => inventoryItems; set => inventoryItems = value; }
+    //public List<InventoryUI> InventoryItems { get => inventoryItems; set => inventoryItems = value; }
     public InventoryUI CurrentSelectedItem { get => currentSelectedItem; set => currentSelectedItem = value; }
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    public InventoryUI GetInventoryItemByName(string inventName)
+    {
+        var foundItem = inventoryItems.Find(s => s.ItemName == inventName);
+        if (foundItem != null)
+        {
+            return foundItem;
+        }
+        return null;
     }
     
     //public void SetCurrentItem(InventoryItem item)

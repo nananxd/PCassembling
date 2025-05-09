@@ -10,6 +10,7 @@ namespace Disassemble
     public class DisassembleTutorial
     {
         public string tutorialId;
+        public UnityEvent buttonEvent;
         [TextArea(5, 2)]
         public string tutorialName;
         [Space(2)]
@@ -18,6 +19,8 @@ namespace Disassemble
         public UnityEvent eventToDisable;
 
         public List<TutorialStep> steps;
+        public bool hasDelay;
+        public bool isCompletedByButton;
         public bool isAutoComplete;
         public bool isDone;
     }
@@ -59,6 +62,14 @@ namespace Disassemble
                 return;
             }
 
+            if (currentTutorial.isCompletedByButton)
+            {
+                currentTutorial.isDone = true;
+                //StartCoroutine(NexTutorialCoroutine());
+                NexTutorial();
+                return;
+            }
+
             if (currentTutorial.isAutoComplete)
             {
                 //currentTutorial.isDone = true;
@@ -67,18 +78,34 @@ namespace Disassemble
                 return;
             }
 
-            var foundStep = currentTutorial.steps.Find(step => step.step == stepsID);
+            //var foundStep = currentTutorial.steps.Find(step => step.step == stepsID);
+            var foundStep = currentTutorial.steps.FindIndex(step => step.step == stepsID &&  !step.isComplete);
 
-
-            if (foundStep != null)
+            foreach (var item in currentTutorial.steps)
             {
-                foundStep.isComplete = true;
-                Debug.Log($"current tutorial :{currentTutorial.tutorialId},steps {foundStep.step},completed");
-                CompleteTutorial();
+                item.eventToDisable?.Invoke();
             }
-            else
+
+
+            //if (foundStep != null)
+            //{
+            //    foundStep.isComplete = true;
+            //    Debug.Log($"current tutorial :{currentTutorial.tutorialId},steps {foundStep.step},completed");
+            //    foundStep.eventToEnable?.Invoke();
+            //    CompleteTutorial();
+            //}
+            //else
+            //{
+            //    Debug.Log($"cannot found step:{stepsID},in the current tutorial");
+            //}
+
+
+            if (foundStep != -1)
             {
-                Debug.Log($"cannot found step:{stepsID},in the current tutorial");
+                currentTutorial.steps[foundStep].isComplete = true;
+                Debug.Log($"current tutorial: {currentTutorial.tutorialId}, step {currentTutorial.steps[foundStep].step} completed");
+                currentTutorial.steps[foundStep].eventToEnable?.Invoke();
+                CompleteTutorial();
             }
 
 
@@ -122,10 +149,24 @@ namespace Disassemble
             currentTutorial = tutorials[currentIndex];
             DisableOtheComponents();// disable all object that is not related to tutorial
             //currentTutorial.eventToEnable?.Invoke();//enable all objects related to tutorial
-            StartCoroutine(EventEnableCoroutine());
+           
+
+            if (currentTutorial.hasDelay)
+            {
+                StartCoroutine(DelayEventToEnableCoroutine());
+            }
+            else
+            {
+                //currentTutorial.eventToEnable?.Invoke();
+                StartCoroutine(EventEnableCoroutine());
+            }
 
         }
-
+        private IEnumerator DelayEventToEnableCoroutine()
+        {
+            yield return new WaitForSeconds(6f);
+            currentTutorial.eventToEnable?.Invoke();
+        }
         private IEnumerator EventEnableCoroutine()
         {
             yield return new WaitForSeconds(.5f);

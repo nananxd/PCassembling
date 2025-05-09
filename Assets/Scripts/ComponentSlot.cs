@@ -81,6 +81,8 @@ public class ComponentSlot : MonoBehaviour,IPointerDownHandler,ISelectHandler,ID
         else
         {
             Debug.Log($"Current selected part is not equal to slot id {slotId}");
+            UIManager.Instance.WrongFeedback();
+            GameManager.Instance.AddComponentError(slotId, 1);
         }
     }
 

@@ -102,7 +102,7 @@ public class QuizManager : MonoBehaviour
                     selectedQuiz.d
                 );
 
-            UIManager.Instance.SetQuizUI(selectedQuiz.quizName);
+            UIManager.Instance.SetQuizUI(selectedQuiz.quizName,currentQuizCount);
             UIManager.Instance.ShowQuiz();
             EnableAllQuizChoices();
             canStartQuiz = false;
@@ -134,7 +134,7 @@ public class QuizManager : MonoBehaviour
                     selectedQuiz.d
                 );
 
-            uiManager.SetQuizUI(selectedQuiz.quizName);
+            uiManager.SetQuizUI(selectedQuiz.quizName,currentQuizCount);
             uiManager.ShowQuiz();
             EnableAllQuizChoices();
             canStartQuiz = false;

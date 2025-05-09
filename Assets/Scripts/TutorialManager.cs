@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Tutorial
 {
+    public UnityEvent imediateEvent;
     public string tutorialId;
+    public bool isCompletedByButton;
+    public bool isCompletedByScroll;
+    public bool hasDelay;
+
     [TextArea(5,2)]
     public string tutorialName;
     [Space(2)]
-    
+    public UnityEvent eventToEnable,eventToDisable;
    
     public List<TutorialStep> steps;
     public bool isDone; 
@@ -21,6 +27,10 @@ public class TutorialStep
 {
     [Header("this is just an id")]
     public string step;
+    [Space(2)][Header("Events to enable")]
+    public UnityEvent eventToEnable;
+    [Space(2)][Header("Events to disable")]
+    public UnityEvent eventToDisable;
     public bool isComplete;
 }
 public class TutorialManager : MonoBehaviour
@@ -70,10 +80,16 @@ public class TutorialManager : MonoBehaviour
 
     public void SetInitialTutorial()
     {
-        CurrentTutorial = tutorials[0];
+        currentTutorial = tutorials[0];
         DisableOtheComponents();
+        currentTutorial.eventToEnable?.Invoke();
     }
 
+    private IEnumerator NexTutorialCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        NexTutorial();
+    }
     private void NexTutorial()
     {
         if (currentIndex + 1 >= tutorials.Count)
@@ -81,12 +97,37 @@ public class TutorialManager : MonoBehaviour
             Debug.LogWarning("No more tutorials available.");
             return;
         }
+        currentTutorial.eventToDisable?.Invoke();
+
+        foreach (var item in currentTutorial.steps)
+        {
+            item.eventToDisable?.Invoke();
+        }
+
         currentIndex++;
-        CurrentTutorial = tutorials[currentIndex];
+        currentTutorial = tutorials[currentIndex];
         DisableOtheComponents();
+
+        currentTutorial.imediateEvent?.Invoke();
+        if (currentTutorial.hasDelay)
+        {
+            StartCoroutine(EventToEnableCoroutine());
+        }
+        else
+        {
+            currentTutorial.eventToEnable?.Invoke();
+        }
+        
+       // 
 
     }
 
+    private IEnumerator EventToEnableCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
+        currentTutorial.eventToEnable?.Invoke();
+        
+    }
     private void CompleteTutorial()
     {
 
@@ -95,6 +136,7 @@ public class TutorialManager : MonoBehaviour
             currentTutorial.isDone = true;// set the current tutorial done or complete
             Debug.Log("Current tutorial Done");
             NexTutorial();
+            //StartCoroutine(NexTutorialCoroutine());
         }
         //else if(currentTutorial.steps.Count <= 0)
         //{
@@ -110,13 +152,27 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
+        if (currentTutorial.isCompletedByButton)
+        {
+            currentTutorial.isDone = true;
+            //StartCoroutine(NexTutorialCoroutine());
+            NexTutorial();
+            return;
+        }
+
         var foundStep = currentTutorial.steps.Find(step => step.step == currentSelectedInteractivity.id);
+
+        foreach (var item in currentTutorial.steps)
+        {
+            item.eventToDisable?.Invoke();
+        }
 
 
         if (foundStep != null)
         {
             foundStep.isComplete = true;
             Debug.Log($"current tutorial :{currentTutorial.tutorialId},steps {foundStep.step},completed");
+            foundStep.eventToEnable?.Invoke();
             CompleteTutorial();
         }
 
@@ -134,10 +190,17 @@ public class TutorialManager : MonoBehaviour
         if (isSlot)
         {
             var foundStep = currentTutorial.steps.FindIndex(step => step.step == currentSelectedInteractivity.id && !step.isComplete);
+
+            foreach (var item in currentTutorial.steps)
+            {
+                item.eventToDisable?.Invoke();
+            }
+
             if (foundStep != -1)
             {
                 currentTutorial.steps[foundStep].isComplete = true;
                 Debug.Log($"current tutorial: {currentTutorial.tutorialId}, step {currentTutorial.steps[foundStep].step} completed");
+                currentTutorial.steps[foundStep].eventToEnable?.Invoke();
                 CompleteTutorial();
             }
         }

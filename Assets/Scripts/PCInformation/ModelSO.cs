@@ -14,6 +14,7 @@ public class ModelSO : ScriptableObject
 [System.Serializable]
 public class Model
 {
+    public string sfx;
     public string modelName;
     public Sprite modelVisual;
 

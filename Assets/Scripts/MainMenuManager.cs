@@ -11,16 +11,19 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Ease easeType;
     [SerializeField] private Transform cameraToRotate, objectTorotateFrom;
 
+    public const string ASSEMBLY_ATTEMPT = "assemble";
+    public const string DISASSEMBLY_ATTEMPT = "disassemble";
+
     private void Awake()
     {
 
-#if UNITY_EDITOR
-        Debug.unityLogger.logEnabled = true;
-#endif
+//#if UNITY_EDITOR
+//        Debug.unityLogger.logEnabled = true;
+//#endif
 
-#if UNITY_ANDROID
-        Debug.unityLogger.logEnabled = false;
-#endif
+//#if UNITY_ANDROID
+//        Debug.unityLogger.logEnabled = false;
+//#endif
 
         DOTween.SetTweensCapacity(3000, 200);
     }
@@ -28,6 +31,7 @@ public class MainMenuManager : MonoBehaviour
     {
         //RotateAround();
         SceneLoaderManager.Instance.LoadLevel("LoadingScene", true);
+        SoundManager.Instance.PlayBGM("BG");
        
     }
 
@@ -37,21 +41,28 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OnAssemble()
     {
+        SoundManager.Instance.LowerVolune("BG");
         var sceneLoader =  SceneLoaderManager.Instance;
         sceneLoader.currentAssesmentType = AssesmentType.assemble;
         //PlayerPrefs.SetString(ConstantData.ASESSMENT_KEY,asessmentType.ToString());
         //SceneLoaderManager.Instance.LoadLevel("AsessmentScene");
+        sceneLoader.SaveAttempt(ASSEMBLY_ATTEMPT, 1);
         sceneLoader.LoadLevelAsAsync("AsessmentScene",TestUIManager.Instance.LoadingScreen);
     }
 
     public void OnDisassemble()
     {
+        SoundManager.Instance.LowerVolune("BG");
         var sceneLoader = SceneLoaderManager.Instance;
         sceneLoader.currentAssesmentType = AssesmentType.disassemble;
+        sceneLoader.SaveAttempt(DISASSEMBLY_ATTEMPT,1);
         //PlayerPrefs.SetString(ConstantData.ASESSMENT_KEY, asessmentType.ToString());
         sceneLoader.LoadLevelAsAsync("Disassemble", TestUIManager.Instance.LoadingScreen);
+        
        // SceneLoaderManager.Instance.LoadLevel("AsessmentScene");
     }
+
+    
 
     public void RotateAround()
     {

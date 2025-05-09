@@ -55,6 +55,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button inventoryButton;
     [SerializeField] private Image showImage, hideImage;
     [SerializeField] private bool isInventoryOpen;
+    public RectTransform inventoryViewport;
+    public ScrollRect inventoryScrollbar;
 
     [Header("Install Motherboard UI")]
     public UnityEvent OnInstallMotherBoardEvent;
@@ -154,7 +156,7 @@ public class UIManager : MonoBehaviour
     private void LateUpdate()
     {
         timerText.text = StatisticsManager.Instance.FormattedTime();
-        SetTutorialUI();// to be refactor nee to remove here
+        //SetTutorialUI();// to be refactor nee to remove here
     }
     private void Update()
     {
@@ -213,9 +215,9 @@ public class UIManager : MonoBehaviour
     {
         levelCompleteUI.SetActive(true) ;
     }
-    public void SetQuizUI(string quizTitle)
+    public void SetQuizUI(string quizTitle,int currentCount)
     {
-        quizNameTxt.text = quizTitle;
+        quizNameTxt.text = $"{currentCount+1}.) {quizTitle}";
         choiceA.SetUI();
         choiceB.SetUI();
         choiceC.SetUI();
@@ -444,19 +446,28 @@ public class UIManager : MonoBehaviour
         if (currentSelectedPart.isDontHaveControlUI)
         {
             OnDone(currentSelectedPart,partName);
+            QuestManager.Instance.CompleteStep(currentStep.componentPartName, currentStep.stepId);
         }
         else
         {
              isRotationCorrect = PCComponentManager.Instance.IsRotationCorrect(currentSelectedPart.gameObject.transform);
             if (isRotationCorrect)
             {
+                SoundManager.Instance.PlaySfx("Click");
                 OnDone(currentSelectedPart, partName);
                 if (PCComponentManager.Instance.CurrentSelectedInteractablePart != null)
                 {
                     var currentInteractable = PCComponentManager.Instance.CurrentSelectedInteractablePart;
 
-
-                    currentInteractable.Slot.SlotCollider.enabled = false;
+                    if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+                    {
+                        currentInteractable.Slot.SlotCollider.enabled = true;
+                    }
+                    else
+                    {
+                        currentInteractable.Slot.SlotCollider.enabled = false;
+                    }
+                    
                     currentInteractable.DeactivateObject();
                     currentInteractable = null;
                     //PCComponentManager.Instance.CurrentSelectedInteractablePart.DeactivateObject();
@@ -464,7 +475,7 @@ public class UIManager : MonoBehaviour
                 }
 
                 TutorialManager.Instance.CompleteTutorialSteps();//check for if tutorial mode
-
+                QuestManager.Instance.CompleteStep(currentStep.componentPartName, currentStep.stepId);
 
             }
             else
@@ -474,8 +485,8 @@ public class UIManager : MonoBehaviour
                 UIManager.Instance.WrongFeedback();
             }
         }
-
-        QuestManager.Instance.CompleteStep(currentStep.componentPartName, currentStep.stepId);
+        //SoundManager.Instance.PlayBGM("BG");
+        //QuestManager.Instance.CompleteStep(currentStep.componentPartName, currentStep.stepId);
         QuestManager.Instance.CheckGroupIfComplete(GameManager.Instance.currentSelectedGroup);
         QuestManager.Instance.CheckIfQuestCompleted(currentStep.componentPartName);
         if (QuestManager.Instance.IsAllQuestFinished())
@@ -485,6 +496,7 @@ public class UIManager : MonoBehaviour
             StatisticsManager.Instance.CanTimerStart = false;
             StartCoroutine(SetStatisticCoroutine());
             GameManager.Instance.Save();
+            StartCoroutine(GameManager.Instance.SaveErrorComponentCoroutine());
             QuizManager.Instance.CanStartQuiz = false;
             
         }

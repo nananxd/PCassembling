@@ -32,8 +32,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isMotherboardInstalled;
     private CinemachineVirtualCamera currentCam, prevCam;
 
+    public List<ComponentError> temComponentError;
+
     public string CurrentMainCamera { get => currentMainCamera; set => currentMainCamera = value; }
     public bool IsMotherboardInstalled { get => isMotherboardInstalled; set => isMotherboardInstalled = value; }
+    public SaveManager SaveMan { get => saveManager; set => saveManager = value; }
 
     private void Awake()
     {
@@ -45,6 +48,16 @@ public class GameManager : MonoBehaviour
     {
         //SetupGamePlay();
         SceneLoaderManager.Instance.LoadLevel("LoadingScene", true);
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment || SceneLoaderManager.Instance.currentGameType == GameType.practice)
+        {
+            SoundManager.Instance.PlayBGM("BG");
+        }
+
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+        {
+            UIManager.Instance.SetNotificationInfoUI("Complete the assesment within 10 minutes");
+            UIManager.Instance.ShowNotification();
+        }
     }
 
     void Update()
@@ -75,7 +88,8 @@ public class GameManager : MonoBehaviour
         if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
         {
             var statisticMan = StatisticsManager.Instance;
-            saveManager.SaveDataResult(SceneLoaderManager.Instance.currentAssesmentType.ToString(),statisticMan.Timer,statisticMan.mistakeCounter,statisticMan.correctAnswersCounter,saveManager.OverallValue(statisticMan.mistakeCounter));
+            saveManager.SaveDataResult(SceneLoaderManager.Instance.currentAssesmentType.ToString(),statisticMan.Timer,statisticMan.mistakeCounter,statisticMan.correctAnswersCounter, saveManager.OverallValue(statisticMan.mistakeCounter, statisticMan.Timer));
+            //StartCoroutine(SaveErrorComponentCoroutine());
             Debug.Log("Save Data");
         }
         else
@@ -180,5 +194,46 @@ public class GameManager : MonoBehaviour
             QuizManager.Instance.CanStartQuiz = true;
         }
        
+    }
+
+    public void AddComponentError(string compName,int count)
+    {
+        var foundComp = temComponentError.Find(x => x.componentName == compName);
+        if (foundComp != null)
+        {
+            foundComp.errorCount += count;
+        }
+        else
+        {
+            //temComponentError.Add(new ComponentError(compName,count));
+            ComponentError errorSave = new ComponentError
+            {
+                componentName = compName,
+                errorCount = count
+            };
+
+            temComponentError.Add(errorSave);
+        }
+    }
+
+    public IEnumerator SaveErrorComponentCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        SaveAssemblyErrorComp();
+    }
+    public void SaveAssemblyErrorComp()
+    {
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+        {
+            Debug.Log("Saving component error");
+            for (int i = 0; i < temComponentError.Count; i++)
+            {
+                var comp = temComponentError[i];
+                saveManager.SaveErrorList(comp.componentName, comp.errorCount);
+            }
+        }
+        
+
+        //temComponentError.Clear();
     }
 }

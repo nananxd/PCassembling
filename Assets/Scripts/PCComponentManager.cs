@@ -154,7 +154,16 @@ public class PCComponentManager : MonoBehaviour
             }
             else
             {
-                componentSlots[i].ActivateIndicator(false);
+                if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+                {
+                    componentSlots[i].ActivateIndicator(true);// need to change to false if not ok in the client
+                }
+                else
+                {
+                    componentSlots[i].ActivateIndicator(false);
+                }
+
+               
             }
         }
     }

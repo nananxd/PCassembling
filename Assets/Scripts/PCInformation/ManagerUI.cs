@@ -54,7 +54,7 @@ public class ManagerUI : MonoBehaviour
         {
             GameObject inventGO = Instantiate(inventPrefab,inventParent.transform);
             var modelUI = inventGO.GetComponent<ModelUI>();
-            modelUI.Setup(modelSO[i].modelName,modelSO[i].modelVisual);
+            modelUI.Setup(modelSO[i].modelName,modelSO[i].modelVisual,modelSO[i].sfx);
         }
 
         ShowModelControl(false);
@@ -116,6 +116,7 @@ public class ManagerUI : MonoBehaviour
 
     public void OnClickInfo()
     {
+        SoundManager.Instance.PlaySfx(ModelsManager.Instance.currentSound);
         Sequence sequence = DOTween.Sequence();
         sequence.AppendCallback(()=> CameraControlManager.Instance.ZoomIn());
         sequence.AppendCallback(() => ShowOrHideCanvas(modelControlCanvasGroup, false));
@@ -124,10 +125,13 @@ public class ManagerUI : MonoBehaviour
         sequence.Append(titleText.DOFade(1f,duration).SetEase(easeType));
         sequence.Append(infoText.DOFade(1f,duration).SetEase(easeType));
         sequence.Join(InfoOpenBtn.transform.DOScale(Vector3.zero,duration).SetEase(easeType));
+        ExploreTutorialManager.Instance.CompleteTutorialSteps();
     }
 
     public void OnCloseInfo()
     {
+        SoundManager.Instance.LowerVolune(ModelsManager.Instance.currentSound);
+        SoundManager.Instance.PlayBGM("InfoBG");
         Sequence sequence = DOTween.Sequence();
         sequence.AppendCallback(() => CameraControlManager.Instance.ZoomOut());    
         sequence.AppendCallback(() => ShowOrHideCanvas(infoCanvasGroup, false));

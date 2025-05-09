@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class PcPart : NameController
 {
+    public UnityEvent onCorrectRotationEvent;
     //public string partName;
     public bool isDontHaveControlUI;
     public string referencePartName;
@@ -69,10 +71,11 @@ public class PcPart : NameController
         }
 
         //currentRot.y += 45f;
-        
+
         //transform.DORotate(new Vector3(currentRot.x, currentRot.y, currentRot.z) ,duration).SetEase(easeType);
         //transform.DORotateQuaternion();
        
+
     }
 
     public void RotateLeft()
@@ -94,15 +97,25 @@ public class PcPart : NameController
         }
         //currentRot.y -= 45f;
         //transform.DORotate(new Vector3(currentRot.x, currentRot.y, currentRot.z), duration).SetEase(easeType);
+        
     }
 
     public void Rotate(float angle, Vector3 axis)
     {
+        onCorrectRotationEvent?.Invoke();
+        //bool isRotationCorrect = PCComponentManager.Instance.IsRotationCorrect(transform);
+
+        //if (isRotationCorrect)
+        //{
+        //    onCorrectRotationEvent?.Invoke();
+        //}
+
         // Calculate the new target rotation using Quaternion multiplication
         Quaternion targetRotation = transform.rotation * Quaternion.AngleAxis(angle, axis);
 
         // Animate to the new rotation
         transform.DORotateQuaternion(targetRotation, duration).SetEase(easeType);
+        
     }
 
     public void MoveAnimation()

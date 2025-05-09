@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DragAndDrop : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,IDragHandler,IBeginDragHandler,IEndDragHandler
 {
+    public UnityEvent onDragEvent, onEndDragEvent;
 
     private GameObject selectedObject;
     BoxCollider col;
@@ -179,6 +181,8 @@ public class DragAndDrop : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,I
     {
         if (selectedObject != null)
         {
+            onDragEvent?.Invoke();
+
             isDragging = true;
             var mousePos = eventData.position;
             Vector3 position = new Vector3(mousePos.x, mousePos.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
@@ -198,7 +202,7 @@ public class DragAndDrop : MonoBehaviour,IPointerUpHandler,IPointerDownHandler,I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+        onEndDragEvent?.Invoke();
     }
 
     #endregion

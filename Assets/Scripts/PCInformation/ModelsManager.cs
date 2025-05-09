@@ -16,6 +16,7 @@ public class ModelsManager : MonoBehaviour
     [SerializeField] private List<ModelName> models;
 
     private Vector3 currentRot;
+    public string currentSound;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class ModelsManager : MonoBehaviour
     private void Start()
     {
         currentRot = transform.eulerAngles;
+        SoundManager.Instance.PlayBGM("InfoBG");
     }
 
     public void RotateModel(bool isLeft)

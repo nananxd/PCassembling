@@ -80,6 +80,12 @@ public class DisassembleInteraction : NameController,IPointerDownHandler
         DisassembleGameManager.Instance.CurrentSelectedGroupParent = selectedParent;
         Disassemble.UIManager.Instance.SpawnUI(selectedParent);
 
+        if (SceneLoaderManager.Instance.currentGameType == GameType.tutorial)
+        {
+            DisassembleTutorialManager.Instance.CurrentTutorial.buttonEvent?.Invoke();
+        }
+
+        //DisassembleTutorialManager.Instance.CompleteTutorialSteps(partsName);
         //selectedParent.DisableObject(partsName);
         //TutorialManager.Instance.CurrentSelectedInteractivity = interactivity;
         //TutorialManager.Instance.CompleteTutorialSteps();

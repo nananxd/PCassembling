@@ -106,6 +106,8 @@ public class LocationTrigger : MonoBehaviour
                 UIManager.Instance.WrongFeedback();
                 Debug.Log("not in trigger list");
                 StatisticsManager.Instance.CountPlaceMistake();
+                GameManager.Instance.AddComponentError(comp.partsName,1);
+                //GameManager.Instance.SaveMan.SaveErrorList(comp.partsName,1);
             }
             #region
             //if (!drag.isDragging && comp.partsName == triggerName)

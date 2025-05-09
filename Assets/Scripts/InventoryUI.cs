@@ -18,10 +18,16 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Button currentButton;
 
+    [Header("Tutorial UI")]
+    [SerializeField] private TextMeshProUGUI tutorialItemTxt;
+    [SerializeField] private GameObject tutorialParent;
+    public bool isComplete;
+
     private string itemName;
     private Vector2 offset;
 
     public BaseInteractivity Interactivity { get => interactivity; set => interactivity = value; }
+    public string ItemName { get => itemName; set => itemName = value; }
 
     private void Start()
     {
@@ -32,7 +38,7 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
         originalParent = transform.GetComponentInParent<RectTransform>();
         Interactivity = GetComponent<BaseInteractivity>();
 
-        Interactivity.id = itemName;
+        Interactivity.id = ItemName;
         //TutorialManager.Instance.objectsToHide.Add(interactivity);
     }
 
@@ -62,8 +68,11 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
         itemPrefab = item;
 
-        this.itemNameTxt.text = itemName;
-        this.itemName = itemName;
+        this.itemNameTxt.text = SetItemName(itemName);
+        //this.itemNameTxt.text = itemName;
+        this.ItemName = itemName;
+
+        tutorialItemTxt.text = itemName;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -89,7 +98,7 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
             rectTransform.anchoredPosition = localPoint + offset;
         }
 
-        PCComponentManager.Instance.HighlightObject(itemName);
+        PCComponentManager.Instance.HighlightObject(ItemName);
 
         //if (itemName == "motherboardScrews")
         //{
@@ -103,7 +112,7 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         rectTransform.transform.parent = originalParent;
-        PCComponentManager.Instance.HighlightObject(itemName, false);
+        PCComponentManager.Instance.HighlightObject(ItemName, false);
         //if (itemName == "motherboardScrews")
         //{
             
@@ -115,30 +124,33 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
         {
             var locationTrigger = hit.collider.gameObject.GetComponent<LocationTrigger>();
             LocationTriggerManager.Instance.CurrentLocationTrigger = locationTrigger;
-            if (locationTrigger.IsNameOnTriggerList(itemName))
+            if (locationTrigger.IsNameOnTriggerList(ItemName))
             {
-                if (PCComponentManager.Instance.placementDependencies.TryGetValue(itemName, out string requiredComponent))
+                if (PCComponentManager.Instance.placementDependencies.TryGetValue(ItemName, out string requiredComponent))
                 {
                     if (PCComponentManager.Instance.placedComponents.Contains(requiredComponent))
                     {
-                        PlaceComponent(itemName);
+                        PlaceComponent(ItemName);
                         TutorialManager.Instance.CompleteTutorialSteps();
                     }
                     else
                     {
                         Debug.Log($"Item Inventory UI :Need to place first the require parts");
                         UIManager.Instance.WrongFeedback();
+                        GameManager.Instance.AddComponentError(itemName,1);
                         rectTransform.anchoredPosition = startPos;
                     }
                 }
                 else
                 {
-                    PlaceComponent(itemName);
+                    PlaceComponent(ItemName);
                     TutorialManager.Instance.CompleteTutorialSteps();
                 }
             }
             else
             {
+                UIManager.Instance.WrongFeedback();
+                GameManager.Instance.AddComponentError(itemName, 1);
                 rectTransform.anchoredPosition = startPos;
                 Debug.Log("Item Inventory UI: the item name is  not in trigger list");
             }
@@ -177,6 +189,53 @@ public class InventoryUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
         UIManager.Instance.HideUnnecessaryUI();
         rectTransform.anchoredPosition = startPos;
     }
+
+
+
+    //tutorial
+
+    public void ActivateTutorial(bool isActive)
+    {
+        tutorialParent.SetActive(isActive);
+    }
+
+    private string SetItemName(string name)
+    {
+        string selectedName = "";
+        switch (name)
+        {
+            case "thermalPaste":
+                selectedName = "Thermal Paste";
+                break;
+            case "hddSata":
+                selectedName = "HDD SATA Data Connector";
+                break;
+            case "opticSata":
+                selectedName = "Optical Drive SATA Data Connector";
+                break;
+            case "motherboardScrews":
+                selectedName = "Motherboard Screws";
+                break;
+            case "powerSupplyScrews":
+                selectedName = "Power Supply Screws";
+                break;
+            case "hddScrews":
+                selectedName = "HDD Screws";
+                break;
+            case "opticScrews":
+                selectedName = "Optical Drive Screws";
+                break;
+            case "frontPanel":
+                selectedName = "Front Panel Connectors";
+                break;
+           
+
+        }
+
+        return selectedName;
+    }
+
+    
 
     
 }

@@ -76,6 +76,10 @@ namespace Disassemble
 
         [Header("Tutorial")]
         [SerializeField] TextMeshProUGUI tutorialTxt;
+        [SerializeField] private GameObject choicesButtonTutorialUI;
+        [SerializeField] private Vector3 offset;
+        [SerializeField] private List<DisassembleTutorialUI> tutorialUI;
+        [SerializeField] private DisassembleTutorialUIController tutorialController;
 
         public CanvasGroup ChoicesCanvasGroup { get => choicesCanvasGroup; set => choicesCanvasGroup = value; }
 
@@ -91,7 +95,7 @@ namespace Disassemble
         private void LateUpdate()
         {
             timerText.text = StatisticsManager.Instance.FormattedTime();
-            SetTutorialUI();
+            //SetTutorialUI();
         }
         void Update()
         {
@@ -119,6 +123,45 @@ namespace Disassemble
             }
                 
 
+        }
+
+        public void SetTutorialPosition(Transform buttonTransform)
+        {
+            choicesButtonTutorialUI.gameObject.SetActive(true);
+            choicesButtonTutorialUI.transform.position = buttonTransform.position + offset;
+        }
+
+        public void EnableTutorialUI(string uiName)
+        {
+            var foundUI = tutorialUI.Find(x => x.partsName == uiName);
+            foundUI.gameObject.SetActive(true);
+        }
+
+        public void DisableTutorialUI(string uiName)
+        {
+            var foundUI = tutorialUI.Find(x => x.partsName == uiName);
+            foundUI.gameObject.SetActive(false);
+        }
+
+        public void EnableButtonTutorialUI(string uiName)
+        {
+            //var foundPart = DisassembleGameManager.Instance.DisassembleInteractions.Find(x => x.partsName == uiName);
+
+            StartCoroutine(ButtonTutorialCoroutine(uiName));
+        }
+
+        private IEnumerator ButtonTutorialCoroutine(string uiName)
+        {
+            yield return new WaitForSeconds(.2f);
+            var foundPart = DisassembleGameManager.Instance.CurrentSelectedGroupParent.GroupsUI.Find(x => x.CurrentPartName == uiName);
+            var descriptionText = tutorialController.buttonTutorialsUI.Find(x => x.tutorialId == uiName);
+            tutorialTxt.text = descriptionText.tutorialText;
+            SetTutorialPosition(foundPart.transform);
+        }
+
+        public void DisableButtonTutorialUI()
+        {
+            choicesButtonTutorialUI.gameObject.SetActive(false);
         }
         #endregion
 
@@ -232,9 +275,9 @@ namespace Disassemble
         #endregion
 
         #region Quiz
-        public void SetQuizUI(string quizTitle)
+        public void SetQuizUI(string quizTitle,int currentCount)
         {
-            quizNameTxt.text = quizTitle;
+            quizNameTxt.text = $"{currentCount+1}.){quizTitle}";
             choiceA.SetUI();
             choiceB.SetUI();
             choiceC.SetUI();

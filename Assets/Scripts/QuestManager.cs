@@ -122,8 +122,8 @@ public class QuestManager : MonoBehaviour
            
             Debug.Log($"group:{group} quest all complete");
             var message = GetMessage(group.ToString());
-            UIManager.Instance.SetNotificationInfoUI(message);
-            UIManager.Instance.ShowNotification();
+            //UIManager.Instance.SetNotificationInfoUI(message);
+            //UIManager.Instance.ShowNotification();
 
             UIManager.Instance.SetComponentGroupComplete();
             GameManager.Instance.SetComponentGroup();
@@ -146,8 +146,8 @@ public class QuestManager : MonoBehaviour
 
             Debug.Log($"group:{group} quest all complete");
             var message = GetMessage(group.ToString());
-            uiManager.SetNotificationInfoUI(message);
-            uiManager.ShowNotification();
+            //uiManager.SetNotificationInfoUI(message);
+            //uiManager.ShowNotification();
 
             uiManager.SetComponentGroupComplete();
             //GameManager.Instance.SetComponentGroup();

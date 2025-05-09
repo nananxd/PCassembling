@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class SceneLoaderManager : MonoBehaviour
 {
     public static SceneLoaderManager Instance;
+    public TotatlAttempts totalAssemblyAttemp, totalDisassemblyAttemp;
     public GameType currentGameType;
     public AssesmentType currentAssesmentType;
 
@@ -23,6 +24,14 @@ public class SceneLoaderManager : MonoBehaviour
         }
     }
 
+    public void SaveAttempt(string mode,int attempt)
+    {
+        if (currentGameType == GameType.asessment)
+        {
+            var currentAttempt = PlayerPrefs.GetInt(mode);
+            PlayerPrefs.SetInt(mode,currentAttempt + attempt);
+        }
+    }
     
     public void LoadLevel(string sceneName,bool isAdditive = false)
     {

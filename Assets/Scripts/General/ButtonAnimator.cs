@@ -21,7 +21,7 @@ public class ButtonAnimator : MonoBehaviour
         buttonTracker = GetComponentInParent<SelectedButtonTracker>();
         currentButton = GetComponent<Button>();
         buttonBGoriginalScale = buttonBackground.transform.localScale;
-        buttonBackground.transform.localScale = new Vector3(0,buttonBackground.transform.localScale.y);
+        //buttonBackground.transform.localScale = new Vector3(0,buttonBackground.transform.localScale.y);
         currentButton.onClick.AddListener(OnClickButtonAnimate);
         buttonOrigColor = currentButton.image.color;
     }
@@ -42,7 +42,7 @@ public class ButtonAnimator : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Join(transform.DOScale(new Vector3(1.1f,1.1f,1.1f),duration).SetEase(easeType));
-        sequence.Join(buttonBackground.transform.DOScaleX(buttonBGoriginalScale.x,duration).SetEase(easeType));
+        //sequence.Join(buttonBackground.transform.DOScaleX(buttonBGoriginalScale.x,duration).SetEase(easeType));
         sequence.Join(currentButton.image.DOColor(buttonBackground.color,duration).SetEase(easeType));
         //sequence.Join(transform.DOScale(Vector3.one, duration).SetEase(easeType));
     }
@@ -51,7 +51,7 @@ public class ButtonAnimator : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Join(transform.DOScale(Vector3.one, duration).SetEase(easeType));
-        sequence.Join(buttonBackground.transform.DOScaleX(0, duration).SetEase(easeType));
+        //sequence.Join(buttonBackground.transform.DOScaleX(0, duration).SetEase(easeType));
         sequence.Join(currentButton.image.DOColor(buttonOrigColor,duration).SetEase(easeType));
     }
 }

@@ -41,6 +41,8 @@ public class DisassembleGameManager : MonoBehaviour
     public Transform pcCaseCorrectPos;
     public Transform pcCaseParent, originalParent;
 
+    [Header("Tutorial")]
+    public List<ComponentError> temComponentError;
     public DisassembleInteractionParent CurrentSelectedGroupParent { get => currentSelectedGroupParent; set => currentSelectedGroupParent = value; }
     public Transform UpTransform { get => upTransform; set => upTransform = value; }
     public Transform RightTransform { get => rightTransform; set => rightTransform = value; }
@@ -71,9 +73,18 @@ public class DisassembleGameManager : MonoBehaviour
        
         currentDisassemblePart = DisassembleParts.cables;      
         SetupGamePlay();
-        StartCoroutine(StartTutorialCoroutine());
+        //StartCoroutine(StartTutorialCoroutine());
 
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment || SceneLoaderManager.Instance.currentGameType == GameType.practice)
+        {
+            SoundManager.Instance.PlayBGM("BG");
+        }
 
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+        {
+            Disassemble.UIManager.Instance.SetNotificationInfoUI("Complete the assesment within 10 minutes");
+            Disassemble.UIManager.Instance.ShowNotification();
+        }
     }
 
     private void Update()
@@ -289,7 +300,7 @@ public class DisassembleGameManager : MonoBehaviour
         if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
         {
             var statisticMan = StatisticsManager.Instance;
-            saveManager.SaveDataResult(SceneLoaderManager.Instance.currentAssesmentType.ToString(), statisticMan.Timer, statisticMan.mistakeCounter, statisticMan.correctAnswersCounter, saveManager.OverallValue(statisticMan.mistakeCounter));
+            saveManager.SaveDataResult(SceneLoaderManager.Instance.currentAssesmentType.ToString(), statisticMan.Timer, statisticMan.mistakeCounter, statisticMan.correctAnswersCounter, saveManager.OverallValue(statisticMan.mistakeCounter,statisticMan.Timer));
             Debug.Log("Save Data");
         }
         else
@@ -389,6 +400,7 @@ public class DisassembleGameManager : MonoBehaviour
             Disassemble.UIManager.Instance.StartCoroutine(Disassemble.UIManager.Instance.SetStatisticCoroutine());
             QuizManager.Instance.CanStartQuiz = false;
             Save();
+            StartCoroutine(SaveErrorComponentCoroutine());
         }
     }
 
@@ -449,6 +461,47 @@ public class DisassembleGameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void AddComponentError(string compName, int count)
+    {
+        var foundComp = temComponentError.Find(x => x.componentName == compName);
+        if (foundComp != null)
+        {
+            foundComp.errorCount += count;
+        }
+        else
+        {
+            //temComponentError.Add(new ComponentError(compName,count));
+            ComponentError errorSave = new ComponentError
+            {
+                componentName = compName,
+                errorCount = count
+            };
+
+            temComponentError.Add(errorSave);
+        }
+    }
+
+    public IEnumerator SaveErrorComponentCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        SaveAssemblyErrorComp();
+    }
+    public void SaveAssemblyErrorComp()
+    {
+        if (SceneLoaderManager.Instance.currentGameType == GameType.asessment)
+        {
+            Debug.Log("Saving component error");
+            for (int i = 0; i < temComponentError.Count; i++)
+            {
+                var comp = temComponentError[i];
+                saveManager.SaveErrorList(comp.componentName, comp.errorCount);
+            }
+        }
+       
+
+        //temComponentError.Clear();
     }
 
 

@@ -12,14 +12,22 @@ public class UIInteractivity : BaseInteractivity
     public override void EnableObject()
     {
         base.EnableObject();
-        uiButton.enabled = true;
+        if (uiButton != null)
+        {
+            uiButton.enabled = true;
+        }
+       
         onEnableEvent?.Invoke();
     }
 
     public override void DisableObject()
     {
         base.DisableObject();
-        uiButton.enabled = false;
+        if (uiButton != null)
+        {
+            uiButton.enabled = false;
+        }
+           
         onDisableEvent?.Invoke();
     }
 }

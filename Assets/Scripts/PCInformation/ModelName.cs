@@ -5,4 +5,5 @@ using UnityEngine;
 public class ModelName : MonoBehaviour
 {
     public string nameOfModel;
+    public string soundName;
 }
